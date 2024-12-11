@@ -3,8 +3,23 @@ const cron = require('node-cron');
 const axios = require('axios');
 const { DateTime } = require('luxon');
 const Vibrant = require('node-vibrant');
+const fs = require('fs');
 
-let countdownChannelId = null; // Variable to store the channel ID
+const DATA_FILE = 'data.json'; // File to store channel information
+
+// Function to load data from JSON file
+function loadData() {
+    if (!fs.existsSync(DATA_FILE)) {
+        return {};
+    }
+    const data = fs.readFileSync(DATA_FILE);
+    return JSON.parse(data);
+}
+
+// Function to save data to JSON file
+function saveData(data) {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 4));
+}
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -29,7 +44,10 @@ module.exports = {
             return interaction.reply({ content: 'Please select a valid text channel.', ephemeral: true });
         }
 
-        countdownChannelId = channel.id;
+        // Save the channel ID in a JSON file
+        const data = loadData();
+        data[interaction.guild.id] = { countdownChannelId: channel.id };
+        saveData(data);
 
         // Acknowledge the interaction
         await interaction.deferReply({ ephemeral: true });
