@@ -5,7 +5,7 @@ const { DateTime } = require('luxon');
 const Vibrant = require('node-vibrant');
 const fs = require('fs');
 
-const DATA_FILE = 'data.json'; // File to store channel information
+const DATA_FILE = '../data.json'; // File to store channel information
 
 // Function to load data from JSON file
 function loadData() {
