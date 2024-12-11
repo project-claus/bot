@@ -1,4 +1,4 @@
-const statusArray = [
+let statusArray = [
     { content: 'Spreading holiday cheer', type: 'PLAYING', status: 'online' },
     { content: 'Wrapping gifts', type: 'WATCHING', status: 'online' },
     { content: 'Listening to Christmas carols', type: 'LISTENING', status: 'online' },
@@ -9,7 +9,7 @@ const statusArray = [
     { content: 'Hanging stockings by the fire', type: 'WATCHING', status: 'online' },
 ];
 
-const PRESENCE_UPDATE_INTERVAL = 10000;
+let PRESENCE_UPDATE_INTERVAL = 10000;
 
 module.exports = {
     name: 'ready',
@@ -17,10 +17,10 @@ module.exports = {
     async execute(client) {
         console.log(`Bot logged in as ${client.user.tag} and is ready!`);
 
-        const updatePresence = async () => {
+        let updatePresence = async () => {
             try {
-                const randomIndex = Math.floor(Math.random() * statusArray.length);
-                const { content, type, status } = statusArray[randomIndex];
+                let randomIndex = Math.floor(Math.random() * statusArray.length);
+                let { content, type, status } = statusArray[randomIndex];
 
                 await client.user.setPresence({
                     activities: [{ name: content, type }],
