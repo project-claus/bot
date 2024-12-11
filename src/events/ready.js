@@ -9,13 +9,14 @@ const statusArray = [
     { content: 'Hanging stockings by the fire', type: 'WATCHING', status: 'online' }
 ];
 
+const PRESENCE_UPDATE_INTERVAL = 10000;
+
 module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
         console.log('Ready!');
 
-        // Function to pick a random presence
         async function pickPresence() {
             const option = Math.floor(Math.random() * statusArray.length);
 
@@ -35,10 +36,8 @@ module.exports = {
             }
         }
 
-        // Initial presence update
         await pickPresence();
 
-        // Update presence every 10 seconds
-        setInterval(pickPresence, 10000);
+        setInterval(pickPresence, PRESENCE_UPDATE_INTERVAL);
     },
 };
