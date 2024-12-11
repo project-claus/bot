@@ -19,18 +19,19 @@ module.exports = {
 
         async function pickPresence() {
             const option = Math.floor(Math.random() * statusArray.length);
+            const selectedStatus = statusArray[option];
 
             try {
                 await client.user.setPresence({
                     activities: [
                         {
-                            name: statusArray[option].content,
-                            type: statusArray[option].type,
+                            name: selectedStatus.content,
+                            type: selectedStatus.type,
                         },
                     ],
-                    status: statusArray[option].status
+                    status: selectedStatus.status
                 });
-                console.log(`Updated presence to: ${statusArray[option].content} (${statusArray[option].type})`);
+                console.log(`Updated presence to: ${selectedStatus.content} (${selectedStatus.type})`);
             } catch (error) {
                 console.error('Error setting presence:', error);
             }
