@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ChannelType } = require('discord.js');
-const { loadData, saveData } = require('../utils/dataUtils'); // Reuse the load/save data logic
+const { loadData, saveData } = require('../utils/dataUtils.js'); // Reuse the load/save data logic
 const ADMIN_USER_ID = '1316521788162834456'; // Replace with your admin's Discord user ID
 
 module.exports = {
